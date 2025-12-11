@@ -50,7 +50,18 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	for i, rec := range records {
-		fmt.Printf("Record %d: %+v\n", i+1, rec)
+
+	// Extract all passwords
+	passwords := []string{}
+	for _, rec := range records {
+		if pwd, ok := rec["Password"]; ok {
+			passwords = append(passwords, pwd)
+		}
+	}
+
+	// Display the results
+	fmt.Println("Found", len(passwords), "passwords:")
+	for _, pwd := range passwords {
+		fmt.Println(pwd)
 	}
 }
